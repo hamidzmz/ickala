@@ -3,18 +3,17 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 import time
 import pyautogui
 import os
+import keyboard
 
-
-folder_path = r"C:\Users\ehsan\Desktop\New folder"
+folder_path = r"Z:\picture"
     # پیدا کردن تمامی فایل‌های عکس در پوشه
 image_files = [f for f in os.listdir(folder_path) if f.endswith('.jpg')]
 
-source_directory = r"C:\Users\ehsan\Downloads"
-destination_directory = r"C:\Users\ehsan\Desktop\nnn"
+source_directory = r"C:\Users\Hamidreza\Downloads"
+destination_directory = r"C:\Users\Hamidreza\Desktop\nnn"
 timeout = 50
 
 
@@ -24,7 +23,7 @@ for image_file in image_files:
     input_path = os.path.join(folder_path, image_file)
 
     # راه‌اندازی مرورگر Chrome
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(executable_path="C:\Program Files\chromedriver-win32\chromedriver.exe")
 
     # باز کردن صفحه وب
     driver.get("https://dewatermark.ai/")
@@ -38,8 +37,8 @@ for image_file in image_files:
         # کلیک کردن بر روی المان
         element.click()
         time.sleep(3)
-        pyautogui.typewrite(r'"{}"'.format(input_path))
-        pyautogui.press('enter')
+        keyboard.write(input_path)
+        keyboard.press_and_release('enter')
 
         # صبر کردن تا المان مورد نظر بر روی صفحه ظاهر شود
         WebDriverWait(driver, 10).until(
